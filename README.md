@@ -1,69 +1,166 @@
-# Linux Log Analysis Toolkit (Linuxログ解析ツールキット)
+# 🐧 Linux Log Analysis Toolkit (Linuxログ解析ツールキット)
 
-A professional, automated toolkit designed for parsing, analyzing, and reporting on Linux system logs. Built with Python and Bash, this project demonstrates robust automation capabilities, clean code architecture, and practical system administration skills.
+[![Linux](https://img.shields.io/badge/OS-Linux-Tux?style=flat-square&logo=linux&logoColor=white&color=222)](https://www.linux.org/)
+[![Bash Shell](https://img.shields.io/badge/Shell-Bash-4EAA25?style=flat-square&logo=gnu-bash&logoColor=white)](https://www.gnu.org/software/bash/)
+[![Python](https://img.shields.io/badge/Python-3.x-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+
+A professional, industry-grade toolkit designed to automate the process of parsing, analyzing, transforming, and backing up Linux system logs. By fusing high-performance **Python scripting (regex + subprocess orchestration)** with lightweight **POSIX Bash utilities**, this toolkit delivers robust command-line automation tailored for Systems Engineers and DevOps Specialists.
+
+---
 
 ## 🇯🇵 プロジェクト概要 (Project Overview)
-本プロジェクトは、Linuxシステムログ（INFO, WARNING, ERROR等）の解析を自動化するためのツールキットです。Pythonを活用したパーサーと、Bashによるシェルスクリプトを組み合わせることで、ログ監視業務の効率化と正確性の向上を目指しています。
-*(This project is a toolkit for automating the analysis of Linux system logs. By combining a Python-based parser with Bash shell scripts, it aims to streamline log monitoring tasks and improve accuracy.)*
+本プロジェクトは、大規模なLinuxシステム環境におけるログ管理と分析を完全に自動化するための統合ツールキットです。Pythonで構築された高機能なパーサーと、Linux標準のシェルユーティリティ（awk, sed, grep等）を駆使したBashスクリプト群を組み合わせることで、インフラ監視業務の効率化、エラー検出の高速化、およびバックアップ自動化を実現しています。
 
-## ✨ Features (特徴)
-- **Automated Processing (自動化):** Bash scripts to batch process multiple log files automatically.
-- **Log Level Classification (ログレベル分類):** Capable of identifying and summarizing system events based on severity (`INFO`, `WARNING`, `ERROR`).
-- **Error Tracking (エラートラッキング):** Extracts the latest ERROR occurrence and uses Regular Expressions to accurately identify its timestamp.
-- **Scalable Architecture (スケーラビリティ):** Designed with maintainability in mind, separating parsing logic (Python) from execution workflows (Bash).
-- **Clear Reporting (レポート作成):** Generates structured output files for easy review of system health.
+*This toolkit is a fully-featured suite designed to automate infrastructure log parsing, diagnostics, and replication in Linux environments. It leverages OOP Python parsers integrated with low-level POSIX utilities (awk, sed, grep, etc.) to streamline log auditing, error tracing, and backup scheduling.*
 
-## 📂 Project Structure (ディレクトリ構成)
+---
+
+## ✨ Features (主な機能)
+
+- 🔍 **Dynamic Log Parsing:** Python-based log parser with standalone execution and modular CLI argument parsing (`argparse`).
+- ⚡ **Orchestrated Error Extraction:** Seamless integration of OS-level `grep` via Python `subprocess` with a pure Python fallback engine for high portability.
+- 📊 **Multifunctional Utilities:**
+  - **`awk` Log Counter:** Extremely fast streaming log-level counter (associative arrays) without high memory overhead.
+  - **`sed` Processor:** Global log transformation replacing sensitive identifiers or severities (`ERROR` to `FAIL`).
+  - **`find` Directory Scanner:** Fast project-wide deep scan to track down stray `.log` files.
+- 📦 **Automated Backups:** Standardized `tar + gzip` archiving utilizing relative extraction paths (`-C`) to preserve a clean directory structure.
+- 🚀 **Remote Deployment & Auditing:** Automated secure transfers using `scp` and non-interactive remote log-state auditing via `ssh`.
+
+---
+
+## 🛠️ Linux Commands & Utilities Used
+
+This project showcases complete mastery over essential Linux administration and shell utilities:
+- **`grep`:** High-speed string matching to filter `ERROR` occurrences.
+- **`awk`:** Pattern scanning and stream processing to count occurrences using hash maps.
+- **`sed`:** Stream editor for filtering and transforming text patterns.
+- **`head` & `tail`:** Efficient reading of log headers and real-time/latest log tailing.
+- **`find`:** Multipurpose file searching within nested directory trees.
+- **`tar` & `gzip`:** Archive creation with standard Gzip compression.
+- **`scp`:** Secure transfer of backup archives to remote servers over SSH.
+- **`ssh`:** Remote, non-interactive shell command execution and remote state validation.
+- **`chmod`:** Posix file permission management (`chmod +x` / mode `100755` integrated directly into Git).
+
+---
+
+## 📂 Project Directory Structure
 
 ```text
-Linux Log Analysis Toolkit/
-├── analyzer/          # Python modules for log parsing logic
+Linux-Log-Analysis-Toolkit/
+├── analyzer/
 │   ├── __init__.py
-│   └── parser.py      # Core parser script using argparse
-├── logs/              # Directory for raw input logs (e.g., server.log)
-├── output/            # Generated analysis reports are saved here
-├── scripts/           # Bash scripts for automation
-│   └── run_analysis.sh # Main execution script
+│   └── parser.py            # Python OOP Core Log Parser (Argparse + Subprocess Grep)
+├── logs/
+│   ├── .gitkeep
+│   └── server.log           # Simulated standard Linux syslog file (INFO, WARNING, ERROR)
+├── output/
+│   ├── .gitkeep
+│   ├── report.txt           # Comprehensive report output from scripts/analyze.sh
+│   ├── server_replaced.log  # Replaced log file generated by scripts/log_replacer.sh
+│   └── summary.txt          # Default parser report generated by analyzer/parser.py
+├── scripts/
+│   ├── analyze.sh           # Runs Python parser, greps ERROR, tails 10 lines into output/report.txt
+│   ├── backup.sh            # Packages logs/ directory into tar.gz with relative paths
+│   ├── check_remote_logs.sh # Connects via SSH to audit directories on remote hosts
+│   ├── find_logs.sh         # Uses 'find' to scan the project for log files
+│   ├── log_counter.sh       # Extremely fast log statistics counter using awk
+│   ├── log_preview.sh       # Instantly previews first 5 and last 5 log lines using head/tail
+│   ├── log_replacer.sh      # Uses 'sed' to transform ERROR logs into FAIL logs
+│   ├── run_analysis.sh      # Shell automation running python parser across multiple log files
+│   └── send_backup.sh       # Automatically securely transfers backup files using scp
 └── README.md
 ```
 
-## 🚀 Getting Started (使い方)
+---
 
-### Prerequisites (前提条件)
+## 🚀 Getting Started & Usage (使い方)
+
+### 📌 Prerequisites
 - Python 3.x
-- Bash (Linux / macOS / Git Bash on Windows)
+- Bash Shell (Linux / macOS / Git Bash or WSL on Windows)
 
-### Execution Steps (実行手順)
-1. **Place Log Files:** Ensure your raw log files (e.g., `server.log`) are placed in the `logs/` directory.
-2. **Run the Automation Script:**
-   Open your terminal and execute the following commands:
-   ```bash
-   cd scripts/
-   chmod +x run_analysis.sh
-   ./run_analysis.sh
-   ```
-3. **View Results:** The parsed summaries will be automatically generated and saved in the `output/` directory.
+### 1. Running the Core Python Analyzer
+Execute the parser standalone to retrieve detailed log-level counts and the latest `ERROR` diagnostic data:
+```bash
+python analyzer/parser.py logs/server.log
+```
+*Specify custom output location:*
+```bash
+python analyzer/parser.py logs/server.log --output output/custom_summary.txt
+```
 
-### Example Output (出力例)
-When running the analysis, you will see a structured summary like this:
+### 2. Executing Automation Scripts (Bash)
+All scripts in the `scripts/` directory have been marked as executable (`chmod +x`). 
+
+#### 📊 Generate a Comprehensive Log Audit Report:
+Run `analyze.sh` to trigger the Python parser, run `grep ERROR`, tail the last 10 lines of the log, and save a combined report in `output/report.txt`:
+```bash
+./scripts/analyze.sh logs/server.log
+```
+
+#### 🧮 Fast Log Level Count via AWK:
+```bash
+./scripts/log_counter.sh logs/server.log
+```
+
+#### 🔄 Replace log text via SED (ERROR to FAIL):
+```bash
+./scripts/log_replacer.sh logs/server.log
+```
+
+#### 📦 Compress and Backup Logs:
+```bash
+./scripts/backup.sh
+```
+
+#### 🚀 Secure Remote Transfers & Audits (SCP & SSH):
+```bash
+# Transfer logs_backup.tar.gz via SCP (configure details inside script first)
+./scripts/send_backup.sh
+
+# Check the state of the logs folder on the remote server via SSH
+./scripts/check_remote_logs.sh
+```
+
+---
+
+## 📸 Console Output Demos (実行例)
+
+### STANDALONE PYTHON RUN
 ```text
 --- Start parsing: server.log ---
 [Log Analysis Summary]
 Total lines processed: 12
   [+] INFO   : 5
   [!] WARNING: 3
-  [x] ERROR  : 4
+  [x] ERROR  : 4 (Extracted via subprocess grep)
 
 [Latest Error Details]
   Timestamp: May 17 09:30:10
   Log Line : May 17 09:30:10 server1 kernel[0]: ERROR: Hardware failure detected on eth0 interface
 
-Results successfully saved to: output\server_results.txt
+Results successfully saved to: output/summary.txt
+--------------------------------------------------
 ```
 
-## 🛠️ Technology Stack (技術スタック)
-- **Python 3:** Core log parsing, file handling, and data extraction.
-- **Bash Shell:** Task automation and batch processing workflow.
+### AWK COUNTER RUN
+```text
+==========================================
+     [ AWK LOG STATISTICS SUMMARY ]       
+==========================================
+  [+] INFO   : 5
+  [!] WARNING: 3
+  [x] ERROR  : 4
+==========================================
+```
 
 ---
-*Developed as a portfolio project to demonstrate backend automation, clean coding practices, and system engineering skills.*
+
+## 🔮 Future Improvements
+- [ ] **Grafana Dashboard Integration:** Expose the output summaries in a JSON format readable by Prometheus/Grafana.
+- [ ] **Slack/Discord Webhook Notifications:** Trigger instant alert webhooks if critical `ERROR` messages are detected in syslog streams.
+- [ ] **Multi-threading:** Upgrade `run_analysis.sh` to batch-process millions of log rows concurrently using Python multiprocess worker pools.
+
+---
+*Developed as a portfolio project showcasing automation, OS orchestration, and advanced DevOps practices.*
