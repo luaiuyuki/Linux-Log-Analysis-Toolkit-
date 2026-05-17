@@ -1,6 +1,7 @@
 import argparse
 import os
 import re
+import subprocess
 
 def extract_timestamp(line):
     """Extracts standard syslog timestamp (e.g., 'May 17 08:46:12') from a log line."""
@@ -9,7 +10,7 @@ def extract_timestamp(line):
 
 def parse_log_file(filepath, output_path):
     """
-    Parses a given Linux log file, counts log levels, and tracks the latest errors.
+    Parses a given Linux log file, counts log levels, and tracks the latest errors using subprocess grep.
     """
     if not os.path.exists(filepath):
         print(f"Error: File not found - {filepath}")
@@ -25,32 +26,44 @@ def parse_log_file(filepath, output_path):
     }
     
     total_lines = 0
-    last_error_line = None
-    last_error_timestamp = None
     
-    # Read and parse the file
+    # Read the file for total lines, INFO and WARNING counts
     with open(filepath, 'r') as infile:
         for line in infile:
             total_lines += 1
-            line = line.strip()
-            if not line:
-                continue
-                
             if "INFO" in line:
                 counts["INFO"] += 1
             elif "WARNING" in line:
                 counts["WARNING"] += 1
-            elif "ERROR" in line:
-                counts["ERROR"] += 1
-                last_error_line = line
-                last_error_timestamp = extract_timestamp(line)
-                
+
+    # Use subprocess to run 'grep' for ERROR
+    last_error_line = None
+    last_error_timestamp = None
+    
+    try:
+        # Run grep command to find lines containing "ERROR"
+        result = subprocess.run(['grep', 'ERROR', filepath], capture_output=True, text=True)
+        if result.returncode == 0 and result.stdout:
+            error_lines = result.stdout.strip().split('\n')
+            counts["ERROR"] = len(error_lines)
+            last_error_line = error_lines[-1]
+            last_error_timestamp = extract_timestamp(last_error_line)
+    except FileNotFoundError:
+        # Fallback if 'grep' is not installed (e.g. on pure Windows without Git Bash)
+        print("Warning: 'grep' command not found on this system. Falling back to Python parsing for ERROR.")
+        with open(filepath, 'r') as infile:
+            for line in infile:
+                if "ERROR" in line:
+                    counts["ERROR"] += 1
+                    last_error_line = line.strip()
+                    last_error_timestamp = extract_timestamp(last_error_line)
+
     # 1. Display summary in the terminal
     print("[Log Analysis Summary]")
     print(f"Total lines processed: {total_lines}")
     print(f"  [+] INFO   : {counts['INFO']}")
     print(f"  [!] WARNING: {counts['WARNING']}")
-    print(f"  [x] ERROR  : {counts['ERROR']}")
+    print(f"  [x] ERROR  : {counts['ERROR']} (Extracted via subprocess grep)")
     
     print("\n[Latest Error Details]")
     if counts["ERROR"] > 0:
@@ -60,6 +73,7 @@ def parse_log_file(filepath, output_path):
         print("  No errors found in the log file.")
         
     # 2. Write the summary to the output file
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
     with open(output_path, 'w') as outfile:
         outfile.write(f"Analysis Report for: {os.path.basename(filepath)}\n")
         outfile.write("=" * 40 + "\n")
