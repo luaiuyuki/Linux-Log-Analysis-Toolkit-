@@ -9,6 +9,7 @@ A professional, automated toolkit designed for parsing, analyzing, and reporting
 ## ✨ Features (特徴)
 - **Automated Processing (自動化):** Bash scripts to batch process multiple log files automatically.
 - **Log Level Classification (ログレベル分類):** Capable of identifying and summarizing system events based on severity (`INFO`, `WARNING`, `ERROR`).
+- **Error Tracking (エラートラッキング):** Extracts the latest ERROR occurrence and uses Regular Expressions to accurately identify its timestamp.
 - **Scalable Architecture (スケーラビリティ):** Designed with maintainability in mind, separating parsing logic (Python) from execution workflows (Bash).
 - **Clear Reporting (レポート作成):** Generates structured output files for easy review of system health.
 
@@ -52,6 +53,10 @@ Total lines processed: 12
   [+] INFO   : 5
   [!] WARNING: 3
   [x] ERROR  : 4
+
+[Latest Error Details]
+  Timestamp: May 17 09:30:10
+  Log Line : May 17 09:30:10 server1 kernel[0]: ERROR: Hardware failure detected on eth0 interface
 
 Results successfully saved to: output\server_results.txt
 ```
