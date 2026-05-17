@@ -155,6 +155,21 @@ Results successfully saved to: output/summary.txt
 
 ---
 
+## 🖼️ Console Run Screenshots
+
+Here are the visual representations of the toolkit executing tasks in real-time. (If you are cloning this repository, save your screenshots inside the `assets/` folder using the exact filenames below to see them render):
+
+#### 1. Core Python Parser Standalone Run
+![Standalone Python Parser Run](assets/standalone_parser.png)
+
+#### 2. Bash Script with AWK Statistics Counter
+![AWK Log Counter Run](assets/awk_counter.png)
+
+#### 3. Comprehensive Report Generation Run (`cat output/report.txt`)
+![Comprehensive Report Run](assets/comprehensive_report.png)
+
+---
+
 ## 🔮 Future Improvements
 - [ ] **Grafana Dashboard Integration:** Expose the output summaries in a JSON format readable by Prometheus/Grafana.
 - [ ] **Slack/Discord Webhook Notifications:** Trigger instant alert webhooks if critical `ERROR` messages are detected in syslog streams.
@@ -162,3 +177,4 @@ Results successfully saved to: output/summary.txt
 
 ---
 *Developed as a portfolio project showcasing automation, OS orchestration, and advanced DevOps practices.*
+

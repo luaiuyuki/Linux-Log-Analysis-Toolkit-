@@ -1,0 +1,12 @@
+May 17 08:32:01 server1 systemd[1]: INFO: Started Session 1 of user root.
+May 17 08:35:14 server1 sshd[1234]: INFO: Accepted publickey for admin from 192.168.1.100 port 54321 ssh2
+May 17 08:40:22 server1 kernel[0]: WARNING: Disk space on /var is running low (85% used)
+May 17 08:45:00 server1 cron[456]: INFO: (root) CMD ( /usr/local/bin/backup.sh)
+May 17 08:46:12 server1 backup.sh[460]: FAIL: Failed to connect to backup server 10.0.0.5: Connection timed out
+May 17 08:50:01 server1 nginx[789]: INFO: Reloading configuration successfully.
+May 17 08:55:33 server1 sshd[1280]: WARNING: Invalid login attempt for user 'guest' from 172.16.0.50
+May 17 09:02:15 server1 mysqld[890]: FAIL: Table 'users' is crashed and should be repaired
+May 17 09:10:00 server1 systemd[1]: INFO: system-update.timer: Succeeded.
+May 17 09:15:45 server1 app_service[1024]: FAIL: OutOfMemoryException - Terminating process
+May 17 09:20:00 server1 sshd[1300]: WARNING: Connection closed by authenticating user root 192.168.1.50 port 54322 [preauth]
+May 17 09:30:10 server1 kernel[0]: FAIL: Hardware failure detected on eth0 interface
