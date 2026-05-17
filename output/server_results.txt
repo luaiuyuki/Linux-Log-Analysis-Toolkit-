@@ -1,0 +1,7 @@
+Analysis Report for: server.log
+========================================
+Total lines: 12
+----------------------------------------
+INFO events   : 5
+WARNING events: 3
+ERROR events  : 4

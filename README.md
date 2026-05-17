@@ -43,6 +43,19 @@ Linux Log Analysis Toolkit/
    ```
 3. **View Results:** The parsed summaries will be automatically generated and saved in the `output/` directory.
 
+### Example Output (出力例)
+When running the analysis, you will see a structured summary like this:
+```text
+--- Start parsing: server.log ---
+[Log Analysis Summary]
+Total lines processed: 12
+  [+] INFO   : 5
+  [!] WARNING: 3
+  [x] ERROR  : 4
+
+Results successfully saved to: output\server_results.txt
+```
+
 ## 🛠️ Technology Stack (技術スタック)
 - **Python 3:** Core log parsing, file handling, and data extraction.
 - **Bash Shell:** Task automation and batch processing workflow.
