@@ -165,7 +165,10 @@ Here are the visual representations of the toolkit executing tasks in real-time.
 #### 2. Bash Script with AWK Statistics Counter
 ![AWK Log Counter Run](assets/awk_counter.png)
 
-#### 3. Comprehensive Report Generation Run (`cat output/report.txt`)
+#### 3. Bash Script with SED Log Replacer
+![SED Log Replacer Run](assets/log_replacer.png)
+
+#### 4. Comprehensive Report Generation Run (`cat output/report.txt`)
 ![Comprehensive Report Run](assets/comprehensive_report.png)
 
 ---
