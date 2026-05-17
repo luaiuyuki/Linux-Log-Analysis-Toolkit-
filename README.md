@@ -1,4 +1,4 @@
-# 🐧 Linux Log Analysis Toolkit (Linuxログ解析ツールキット)
+# 🐧 Linux Log Analysis Toolkit
 
 [![Linux](https://img.shields.io/badge/OS-Linux-Tux?style=flat-square&logo=linux&logoColor=white&color=222)](https://www.linux.org/)
 [![Bash Shell](https://img.shields.io/badge/Shell-Bash-4EAA25?style=flat-square&logo=gnu-bash&logoColor=white)](https://www.gnu.org/software/bash/)
@@ -9,14 +9,12 @@ A professional, industry-grade toolkit designed to automate the process of parsi
 
 ---
 
-## 🇯🇵 プロジェクト概要 (Project Overview)
-本プロジェクトは、大規模なLinuxシステム環境におけるログ管理と分析を完全に自動化するための統合ツールキットです。Pythonで構築された高機能なパーサーと、Linux標準のシェルユーティリティ（awk, sed, grep等）を駆使したBashスクリプト群を組み合わせることで、インフラ監視業務の効率化、エラー検出の高速化、およびバックアップ自動化を実現しています。
-
-*This toolkit is a fully-featured suite designed to automate infrastructure log parsing, diagnostics, and replication in Linux environments. It leverages OOP Python parsers integrated with low-level POSIX utilities (awk, sed, grep, etc.) to streamline log auditing, error tracing, and backup scheduling.*
+## 📋 Project Overview
+This toolkit is a fully-featured suite designed to automate infrastructure log parsing, diagnostics, and replication in Linux environments. It leverages OOP Python parsers integrated with low-level POSIX utilities (awk, sed, grep, etc.) to streamline log auditing, error tracing, and backup scheduling.
 
 ---
 
-## ✨ Features (主な機能)
+## ✨ Features
 
 - 🔍 **Dynamic Log Parsing:** Python-based log parser with standalone execution and modular CLI argument parsing (`argparse`).
 - ⚡ **Orchestrated Error Extraction:** Seamless integration of OS-level `grep` via Python `subprocess` with a pure Python fallback engine for high portability.
@@ -74,7 +72,7 @@ Linux-Log-Analysis-Toolkit/
 
 ---
 
-## 🚀 Getting Started & Usage (使い方)
+## 🚀 Getting Started & Usage
 
 ### 📌 Prerequisites
 - Python 3.x
@@ -125,7 +123,7 @@ Run `analyze.sh` to trigger the Python parser, run `grep ERROR`, tail the last 1
 
 ---
 
-## 📸 Console Output Demos (実行例)
+## 📸 Console Output Demos
 
 ### STANDALONE PYTHON RUN
 ```text
