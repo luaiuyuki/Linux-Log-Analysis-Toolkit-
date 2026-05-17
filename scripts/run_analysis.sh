@@ -30,7 +30,7 @@ for log_file in "$LOG_DIR"/*; do
         fi
         
         echo "Processing $log_file..."
-        python "$ANALYZER_SCRIPT" "$log_file" --output "$OUTPUT_DIR/${filename}_results.txt"
+        python "$ANALYZER_SCRIPT" "$log_file" --output "$OUTPUT_DIR/summary.txt"
     fi
 done
 

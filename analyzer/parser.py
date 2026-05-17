@@ -81,7 +81,7 @@ def parse_log_file(filepath, output_path):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Linux Log Parser")
     parser.add_argument("log_file", help="Path to the log file to parse")
-    parser.add_argument("--output", help="Path to output the results", default="../output/results.txt")
+    parser.add_argument("--output", help="Path to output the results", default="output/summary.txt")
     
     args = parser.parse_args()
     parse_log_file(args.log_file, args.output)
