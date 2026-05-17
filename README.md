@@ -178,6 +178,5 @@ Here are the visual representations of the toolkit executing tasks in real-time.
 - [ ] **Slack/Discord Webhook Notifications:** Trigger instant alert webhooks if critical `ERROR` messages are detected in syslog streams.
 - [ ] **Multi-threading:** Upgrade `run_analysis.sh` to batch-process millions of log rows concurrently using Python multiprocess worker pools.
 
----
-*Developed as a portfolio project showcasing automation, OS orchestration, and advanced DevOps practices.*
+
 
